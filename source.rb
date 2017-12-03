@@ -18,16 +18,16 @@ for i in 0..Window.height/2/BLOCK_HEIGHT do
         block.push(0+BLOCK_WIDTH*j,0+BLOCK_HEIGHT*i,blockgraph[rand(3)])
     end
 end
-=begin
-block.each do |i|
+i=0
+while i<block.length do
     blocks.push(Sprite.new(block[i],block[i+1],block[i+2]))
     i+=3
 end
-=end
 
 Window.loop do #メインループ
-    block.each do |i|
-        Window.draw(block[i],block[i+1],blockgraph[0])#3つ目の引数がうまく読み込めない
+    i=0
+    while i<block.length do
+        Window.draw(block[i],block[i+1],block[i+2])#3つ目の引数がうまく読み込めない
         i+=3
     end
     ballx=ballx+Input.x
