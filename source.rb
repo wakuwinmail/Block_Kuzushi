@@ -12,15 +12,23 @@ bally = 0 #y座標の変数
 blockgraph = Image.load_tiles('block.png',4,1) #ブロック画像を読み込む
 ballgraph=Image.new(10,10).circleFill(5,5,5,[255,255,255])
 block=[]
+blocks=[]
 for i in 0..Window.height/2/BLOCK_HEIGHT do
     for j in 0..Window.width/BLOCK_WIDTH do
-    block.push(0+BLOCK_WIDTH*j,0+BLOCK_HEIGHT*i,blockgraph[rand(3)])
+        block.push(0+BLOCK_WIDTH*j,0+BLOCK_HEIGHT*i,blockgraph[rand(3)])
     end
 end
+=begin
+block.each do |i|
+    blocks.push(Sprite.new(block[i],block[i+1],block[i+2]))
+    i+=3
+end
+=end
 
 Window.loop do #メインループ
     block.each do |i|
-        Window.draw(block[i])#これで行けると思ったけどダメだった
+        Window.draw(block[i],block[i+1],blockgraph[0])#3つ目の引数がうまく読み込めない
+        i+=3
     end
     ballx=ballx+Input.x
     bally=bally+Input.y
