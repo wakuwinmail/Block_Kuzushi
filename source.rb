@@ -18,9 +18,11 @@ class Ball < MyObject
 @@speed=0
 @@vecx=0
 @@vecy=0
+@@hitnum=0
 attr_accessor :speed
 attr_accessor :vecx
 attr_accessor :vecy
+attr_accessor :hitnum
 
 def start(mousex,flag)
     self.x=mousex
@@ -42,7 +44,7 @@ def update(width,height)
 end
 
 def reflect
-    @@vecy*=-1
+    @@vecy*=-1 if @@hitnum<=0
     @@speed+=0.005
 end
 end
@@ -73,11 +75,13 @@ Window.loop do #メインループ
 
     ball.update(Window.width,Window.height)
 
+    ball.hitnum=0
     ball.reflect if ball===bar
     block.each do |i|
         if ball===i then
-                i.vanish
-                ball.reflect
+            i.vanish
+            ball.reflect
+            ball.hitnum+=1
         end
     end
 
